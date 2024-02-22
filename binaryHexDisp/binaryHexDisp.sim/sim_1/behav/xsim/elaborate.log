@@ -1,0 +1,8 @@
+Vivado Simulator 2018.2
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 31a6bca05cf945b0b9d78dd300f571ee --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot sevenSegDecoder_tb_behav xil_defaultlib.sevenSegDecoder_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-665] expression has 0 elements ; formal sw expects 4 [C:/Users/Jake.Edwards/Desktop/ECE 281/ece281-lab2/binaryHexDisp/binaryHexDisp.srcs/sim_1/new/sevenSegDecoder_tb.vhd:45]
+ERROR: [VRFC 10-665] expression has 0 elements ; formal seg expects 7 [C:/Users/Jake.Edwards/Desktop/ECE 281/ece281-lab2/binaryHexDisp/binaryHexDisp.srcs/sim_1/new/sevenSegDecoder_tb.vhd:46]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit sevensegdecoder_tb in library work failed.
