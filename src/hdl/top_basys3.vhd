@@ -11,18 +11,16 @@
 --| ---------------------------------------------------------------------------
 --|
 --| FILENAME      : top_basys3.vhd
---| AUTHOR(S)     : Capt Phillip Warner
---| CREATED       : 01/22/2018 Last modified 02/09/2023
---| DESCRIPTION   : This file implements the top level module for a BASYS 3 to utilize 
---|					a seven-segment decoder for displaying hex values on seven-segment 
---|					displays (7SD) according to 4-bit inputs provided by switches.
+--| AUTHOR(S)     : Capt Dan Johnson
+--| CREATED       : 01/30/2019 Last Modified 06/24/2020
+--| DESCRIPTION   : This file implements the top level module for a BASYS 3 to create a full adder
+--|                 from two half adders.
 --|
---|					Inputs:  sw (3:0)  --> 4-bit signal to deternmine 7SD value to be diplayed
---|							 btnC	   --> activate 7SD
+--|					Inputs:  sw (2:0) 	 --> 3-bit sw input (Sum bits and 1 cin)
+--|							 
+--|					Outputs: led (1:0)   --> sum output and carry out.
 --|
---|					Output:  seg (6:0) --> 7-bit signal to activate the individual segments (active low)
---|							 an (3:0)  --> 4-bit signal to control which display turns on (active low)
---|
+--| DOCUMENTATION : None
 --|
 --+----------------------------------------------------------------------------
 --|
@@ -61,41 +59,54 @@ library ieee;
 
 entity top_basys3 is
 	port(
-		-- 7-segment display segments (cathodes CG ... CA)
-		seg		:	out std_logic_vector(6 downto 0);  -- seg(6) = CG, seg(0) = CA
-
-		-- 7-segment display active-low enables (anodes)
-		an      :	out std_logic_vector(3 downto 0);
-
 		-- Switches
-		sw		:	in  std_logic_vector(3 downto 0);
+		sw		:	in  std_logic_vector(2 downto 0);
 		
-		-- Buttons
-		btnC	:	in	std_logic
-
+		-- LEDs
+		led	    :	out	std_logic_vector(1 downto 0)
+		
 	);
 end top_basys3;
 
 architecture top_basys3_arch of top_basys3 is 
 	
-  -- declare the component of your top-level design unit under test (UUT)
+  -- declare the component of your top-level design 
+  component halfAdder is 
+    port(
+      i_A     : in  std_logic; -- 1-bit input port
+      i_B     : in  std_logic; 
+      o_S     : out std_logic;  -- 1-bit output port
+      o_Cout  : out std_logic
+      );
+    end component halfAdder;
 
-
-  -- create wire to connect button to 7SD enable (active-low)
-
-  
+  -- declare any signals you will need	
+  signal w_sw1 : std_logic := '0'; 
+  signal w_S1, w_Cout1, w_Cout2 : std_logic := '0';
+    
 begin
-	-- PORT MAPS ----------------------------------------
-
-	--	Port map: wire your component up to the switches and seven-segment display cathodes
-	-----------------------------------------------------	
+	-- PORT MAPS --------------------
+        halfAdder1_inst: halfAdder
+        port map(
+            i_A     => sw(0),
+            i_B     => sw(1),
+            o_S     => w_S1,
+            o_Cout  => w_Cout1
+        );
+        w_sw1 <= w_S1;
+        
+        halfAdder2_inst: halfAdder
+        port map(
+            i_A     => w_sw1,
+            i_B     => sw(2),
+            o_S     => led(0),
+            o_Cout  => w_Cout2
+        );
+   
+	---------------------------------
 	
-	
-	-- CONCURRENT STATEMENTS ----------------------------
-	
-	-- wire up active-low 7SD anode (active low) to button (active-high)
-	-- display 7SD 0 only when button pushed
-	-- other 7SD are kept off
-	-----------------------------------------------------
-	
+	-- CONCURRENT STATEMENTS --------
+	 led(1) <= w_Cout2 or w_Cout1;
+	 
+	---------------------------------
 end top_basys3_arch;
