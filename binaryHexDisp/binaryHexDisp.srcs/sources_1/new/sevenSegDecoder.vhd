@@ -55,7 +55,7 @@ library ieee;
 entity sevenSegDecoder is
     Port ( 
         i_D : in STD_LOGIC_VECTOR (3 downto 0);
-        o_D : out STD_LOGIC_VECTOR (6 downto 0)
+        o_S : out STD_LOGIC_VECTOR (6 downto 0)
         );
 end sevenSegDecoder;
 

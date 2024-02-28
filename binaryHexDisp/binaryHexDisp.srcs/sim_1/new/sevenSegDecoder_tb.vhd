@@ -32,7 +32,7 @@ architecture test_bench of sevenSegDecoder_tb is
 component sevenSegDecoder is
     Port ( 
         i_D : in STD_LOGIC_VECTOR (3 downto 0);
-        o_D : out STD_LOGIC_VECTOR (6 downto 0)
+        o_S : out STD_LOGIC_VECTOR (6 downto 0)
         );
 end component;
 
@@ -43,7 +43,7 @@ begin
 
     sevenSegDecoder_inst : sevenSegDecoder port map(
         i_D => w_sw,
-        o_D => w_seg
+        o_S => w_seg
     );    
 
     test_process : process
