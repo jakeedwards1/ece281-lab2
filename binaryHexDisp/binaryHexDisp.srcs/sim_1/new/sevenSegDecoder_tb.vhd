@@ -41,7 +41,7 @@ signal w_seg : STD_LOGIC_VECTOR(6 downto 0);
 
 begin
 
-    uut_inst : sevenSegDecoder port map(
+    sevenSegDecoder_inst : sevenSegDecoder port map(
         i_D => w_sw,
         o_S => w_seg
     );    
