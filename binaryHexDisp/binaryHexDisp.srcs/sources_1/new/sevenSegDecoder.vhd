@@ -107,13 +107,13 @@ w_Sg <= '1' when ((i_D = x"0") or
                   (i_D = x"1") or
                   (i_D = x"7") ) else '0';
                   
-o_D(6) <= w_Sa;
-o_D(5) <= w_Sb;
-o_D(4) <= w_Sc;
-o_D(3) <= w_Sd;
-o_D(2) <= w_Se;
-o_D(1) <= w_Sf;
-o_D(0) <= w_Sg;
+o_S(6) <= w_Sa;
+o_S(5) <= w_Sb;
+o_S(4) <= w_Sc;
+o_S(3) <= w_Sd;
+o_S(2) <= w_Se;
+o_S(1) <= w_Sf;
+o_S(0) <= w_Sg;
 
 end Behavioral;
     
