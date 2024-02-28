@@ -86,6 +86,7 @@ architecture top_basys3_arch of top_basys3 is
     
 begin
 	-- PORT MAPS --------------------
+	
         halfAdder1_inst: halfAdder
         port map(
             i_A     => sw(0),
